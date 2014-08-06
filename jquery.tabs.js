@@ -3,8 +3,8 @@
 * Author: Edward Casbon
 * Email: edward@edwardcasbon.co.uk
 * URL: http://www.edwardcasbon.co.uk
-* Version: 1.1
-* Date: 8th July 2014
+* Version: 1.2
+* Date: 6th August 2014
 *
 * Example usage:
 * $(".tabbable-component").tabs(options);
@@ -12,6 +12,7 @@
 * Options:
 * activeClass: "active" // HTML class for active elements.
 * containerClass: "container" // HTML class for the tabbed container (Dynamically added).
+* tabClass: "tab" // HTML class for a tabbed piece of content.
 * animationSpeed: 180 // Speed at which the tabs animate.
 * scrollTo: true // Scroll to the selected tab.
 * scrollToOffset: 0 // Offset for scroll to.
@@ -27,6 +28,7 @@ window.tabs = (function($){
 	var settings = {
 		activeClass: 	"active",
 		containerClass: "container",
+		tabClass: 		"tab",
 		animationSpeed: 180,
 		scrollTo: 		true,
 		scrollToOffset: 0,
@@ -52,18 +54,18 @@ window.tabs = (function($){
 			
 			// Set up variables.
 			var $this = $(this),
-				$first = $this.find("article").first();
+				$first = $this.find("." + settings.tabClass).first();
 				
-			// Wrap all the articles in a container			
-			$this.find("article").wrapAll($("<div class=\"" + settings.containerClass + "\"/>")
+			// Wrap all the tabs in a container			
+			$this.find("." + settings.tabClass).wrapAll($("<div class=\"" + settings.containerClass + "\"/>")
 								.css("overflow", "hidden")
-								.css("height", $first.outerHeight())
+								.css("height", $first.outerHeight(true))
 								.css("clear", "both"));
 								
 			var $container = $this.find("." + settings.containerClass).first();
 					
-			// Hide all articles and show the first.
-			$this.find("article").hide().first().show();
+			// Hide all tabs and show the first.
+			$this.find("." + settings.tabClass).hide().first().show();
 			
 			// Set active tab.
 			$this.find("nav a").first().addClass(settings.activeClass);
@@ -86,11 +88,11 @@ window.tabs = (function($){
 			
 			// Add pagination.
 			if(settings.pagination) {
-				var articleCount = $this.find("article").length,
+				var tabCount = $this.find("." + settings.tabClass).length,
 					$navigation = $this.find("nav");
 				
-				$this.find("article").each(function(index){
-					var $article = $(this),
+				$this.find("." + settings.tabClass).each(function(index){
+					var $tab = $(this),
 						$pagination = $("<nav/>").addClass("pagination"),
 						$navItem;
 					
@@ -104,7 +106,7 @@ window.tabs = (function($){
 						$prevLink.appendTo($pagination);
 					}
 					
-					if(index !== (articleCount-1)) {
+					if(index !== (tabCount-1)) {
 						// Next link
 						$navItem = $navigation.find("a").eq(index+1);
 						var $nextLink = $("<a/>")
@@ -115,13 +117,13 @@ window.tabs = (function($){
 					}
 				
 					// Append the pagination to the article.
-					$article.append($pagination);
+					$tab.append($pagination);
 				});
 			}
 			
 			// Recalculate the height after the window has loaded.
 			$(window).load(function(){
-				$container.css("height", $this.find("article").first().outerHeight());
+				$container.css("height", $this.find("." + settings.tabClass).first().outerHeight(true));
 			});
 		});
 	};
@@ -133,10 +135,10 @@ window.tabs = (function($){
 			if($this.find(hash).length > 0) {
 				// $this = the tabbed element.
 				var $container 		= $this.find("." + settings.containerClass),
-					$activeTab 		= $this.find("nav ." + settings.activeClass),
-					$activeArticle 	= $this.find("article:visible"),
-					$thisTab 		= $this.find("nav a[href=\"" + hash + "\"]"),
-					$thisArticle 	= $this.find(hash);
+					$activeTabNav	= $this.find("nav ." + settings.activeClass),
+					$activeTab 		= $this.find("." + settings.tabClass + ":visible"),
+					$thisTabNav		= $this.find("nav a[href=\"" + hash + "\"]"),
+					$thisTab	 	= $this.find(hash);
 				
 				// Scroll to the correct location on the page.
 				if(settings.scrollTo) {
@@ -146,22 +148,22 @@ window.tabs = (function($){
 				}
 							
 				// Reset tabs
-				$activeTab.removeClass(settings.activeClass);
-				$thisTab.addClass(settings.activeClass);
+				$activeTabNav.removeClass(settings.activeClass);
+				$thisTabNav.addClass(settings.activeClass);
 			
 				// Fade out current article
-				$activeArticle.fadeOut(settings.animationSpeed, function(){
+				$activeTab.fadeOut(settings.animationSpeed, function(){
 				
 					// Hide next article (opacity 0)
-					$thisArticle.fadeTo(settings.animationSpeed, 0, function(){
-						$thisArticle.show();
+					$thisTab.fadeTo(settings.animationSpeed, 0, function(){
+						$thisTab.show();
 					
 						// Animate height difference on container
 						$container.animate({
-							height: $thisArticle.outerHeight() + "px"
+							height: $thisTab.outerHeight(true) + "px"
 						}, {
 							complete: function(){
-								$thisArticle.fadeTo(settings.animationSpeed, 1);
+								$thisTab.fadeTo(settings.animationSpeed, 1);
 							},
 							duration: settings.animationSpeed
 						});

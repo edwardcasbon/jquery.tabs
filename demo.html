@@ -1,0 +1,61 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Tabbable content</title>
+		<style>
+		/* Known bug fix to ensure that margins add to the calculated height. */
+		.tab { border: 1px solid transparent; }
+		</style>
+	</head>
+	<body>
+		<h1>Tabbed content example</h1>
+		
+		<section class="tabbed">
+			<h1>Tabbed content</h1>
+			<nav>
+				<ul>
+					<li><a href="#tab-1">Tab 1</a></li>
+					<li><a href="#tab-2">Tab 2</a></li>
+					<li><a href="#tab-3">Tab 3</a></li>
+				</ul>
+			</nav>
+		
+			<div id="tab-1" class="tab">
+				<h2>Tab 1 heading</h2>
+				<p>1 line</p>
+			</div>
+			
+			<div id="tab-2" class="tab">
+				<h2>Tab 2 heading</h2>
+				<p>1 line</p>
+				<p>2 line</p>
+			</div>
+			
+			<div id="tab-3" class="tab">
+				<h2>Tab 3 heading</h2>
+				<p>1 line</p>
+				<p>2 line</p>
+				<p>3 line</p>
+			</div>
+		</section>
+		
+		<h2>More content here</h2>
+		<p>More content paragraph</h2>
+		
+		<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+		<script src="jquery.tabs.min.js"></script>
+		<script>
+			$(function(){
+				$(".tabbed").tabs({
+					activeClass: 	"active",
+					containerClass: "container",
+					animationSpeed: 180,
+					scrollTo: 		true,
+					scrollToOffset: 0,
+					pagination: 	true
+				});
+			});
+		</script>
+	</body>
+</html>
