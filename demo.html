@@ -7,6 +7,9 @@
 		/* Known bug fix to ensure that margins add to the calculated height. */
 		.tab { border: 1px solid transparent; }
 		</style>
+		
+		<script src="http://ajax.aspnetcdn.com/ajax/modernizr/modernizr-2.7.2.js"></script>
+		
 	</head>
 	<body>
 		<h1>Tabbed content example</h1>
@@ -18,6 +21,9 @@
 					<li><a href="#tab-1">Tab 1</a></li>
 					<li><a href="#tab-2">Tab 2</a></li>
 					<li><a href="#tab-3">Tab 3</a></li>
+					<li><a href="ajax-1.html" data-tab-id="tab-4">Ajax 1</a></li>
+					<li><a href="/ajax-2.html">Ajax 2</a></li>
+					<li><a href="http://www.google.co.uk" data-tab-id="google">Google</a></li>
 				</ul>
 			</nav>
 		
@@ -41,18 +47,15 @@
 		</section>
 		
 		<h2>More content here</h2>
-		<p>More content paragraph</h2>
+		<p>More content paragraph</p>
+		<a href="#here">Link to here</a>
+		<p id="here">Here</p>
 		
 		<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 		<script src="jquery.tabs.min.js"></script>
 		<script>
 			$(function(){
 				$(".tabbed").tabs({
-					activeClass: 	"active",
-					containerClass: "container",
-					animationSpeed: 180,
-					scrollTo: 		true,
-					scrollToOffset: 0,
 					pagination: 	true
 				});
 			});
