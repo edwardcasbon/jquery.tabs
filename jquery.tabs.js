@@ -82,7 +82,7 @@ window.tabs = (function($){
 				
 			// Wrap all the tabs in a container			
 			$this.find("." + settings.tabClass).wrapAll($("<div class=\"" + settings.containerClass + "\"/>")
-								.css("overflow", "hidden")
+								/* .css("overflow", "hidden") */
 								.css("height", $first.outerHeight(true))
 								.css("clear", "both"));
 								
