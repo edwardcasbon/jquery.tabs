@@ -164,7 +164,7 @@ window.tabs = (function($){
 		$.each(tabs, function(){	
 			var $this = $(this); // $this = the tabbed element containing the tabs.
 			
-			if($this.find(hash).length > 0) {
+			if(($this.find(hash).length > 0) && ($this.find(hash).is("." + settings.tabClass))) {
 				var $container 		= $this.find("." + settings.containerClass),
 					$activeTabNav	= $this.find("nav ." + settings.activeClass),
 					$activeTab 		= $this.find("." + settings.tabClass + ":visible"),
