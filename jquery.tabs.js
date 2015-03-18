@@ -3,8 +3,8 @@
 * Author: Edward Casbon
 * Email: edward@edwardcasbon.co.uk
 * URL: http://www.edwardcasbon.co.uk
-* Version: 1.3
-* Date: 7th August 2014
+* Version: 1.4
+* Date: 18th March 2015
 *
 * Example usage:
 * $(".tabbable-component").tabs(options);
@@ -290,7 +290,7 @@ window.tabs = (function($){
 })(jQuery);
 
 // Init the tabs functionality.
-$.fn.tabs = function(options) {
+jQuery.fn.tabs = function(options) {
 	window.tabs.initTabs.apply(this, [options]);
 };
 
