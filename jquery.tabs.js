@@ -176,7 +176,7 @@ window.tabs = (function($){
 				// Scroll to the correct location on the page.
 				if(settings.scrollTo) {
 					$("html, body").animate({
-						scrollTop: $this.position().top + parseInt(settings.scrollToOffset)
+						scrollTop: $this.offset().top + parseInt(settings.scrollToOffset)
 					});
 				}
 
