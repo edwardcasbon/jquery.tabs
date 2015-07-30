@@ -294,14 +294,23 @@ jQuery.fn.tabs = function(options) {
 	window.tabs.initTabs.apply(this, [options]);
 };
 
-// If the hash changes then toggle the tab.
-window.onhashchange = function(){
-	window.tabs.toggleTab(location.hash);
-};
-
-// Check to see if page has loaded with a hashed URL.
-window.onload = function() {
-	if(location.hash !== "") {
-		window.tabs.toggleTab(location.hash);
+// Utility function to add a listener to an element.
+window.addListener = function(el, event, callback) {
+	if(el.addEventListener) {
+		el.addEventListener(event, callback);
+	} else if(el.attachEvent) {
+		el.attachEvent('on' + event, callback);
 	}
 };
+
+// If the hash changes then toggle the tab.
+window.addListener(window, 'hashchange', function(){
+	window.tabs.toggleTab(location.hash);
+});
+
+// Check to see if page has loaded with a hashed URL.
+window.addListener(window, 'load', function(){
+	if(location.hash !== '') {
+		window.tabs.toggleTab(location.hash);
+	}
+});
