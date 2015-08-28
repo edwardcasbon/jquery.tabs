@@ -127,7 +127,7 @@ window.tabs = (function($){
 			$this.find("." + settings.template.tab.container.classes.join(".")).hide().first().show();
 
 			// Set active tab.
-			$this.find("nav a").first().addClass(settings.template.nav.links.activeClass);
+			$this.find("nav li").first().addClass(settings.template.nav.links.activeClass);
 
 			// IE8 bug fix
 			if(isIE8()) {
@@ -138,7 +138,7 @@ window.tabs = (function($){
 			$this.find("nav a").on("click", function(e){
 				var $this = $(this);
 
-				if(!$this.hasClass(settings.template.nav.links.activeClass)) {
+				if(!$this.parent('li').hasClass(settings.template.nav.links.activeClass)) {
 					if($this.attr("href").charAt(0) !== "#") {
 						e.preventDefault(); // Stop the loading of the new page.
 						window.location.hash = $this.attr("data-tab-id"); // Update the hash to the ajax tab ID.
@@ -182,7 +182,7 @@ window.tabs = (function($){
 
 				// Reset tabs
 				$activeTabNav.removeClass(settings.template.nav.links.activeClass);
-				$thisTabNav.addClass(settings.template.nav.links.activeClass);
+				$thisTabNav.parent('li').addClass(settings.template.nav.links.activeClass);
 
 				// Fade out current article
 				$activeTab.fadeOut(settings.animationSpeed, function(){
