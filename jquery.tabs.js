@@ -212,8 +212,8 @@ window.tabs = (function($){
 					$thisTab.show();
 
 					// run callback
-					if(settings.onTabChange) {
-						settings.onTabChange();
+					if(settings.onTabChange && typeof settings.onTabChange === 'function') {
+						settings.onTabChange.call();
 					}
 
 					// Animate height difference on container
