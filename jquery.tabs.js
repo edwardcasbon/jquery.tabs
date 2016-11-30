@@ -154,10 +154,16 @@ window.tabs = (function($){
 			}
 
 			// Recalculate the height after the window has loaded.
+			adjustContainerHeight($container, $this);
 			$(window).load(function(){
-				$container.css("height", $this.find("." + settings.template.tab.container.classes.join(".")).first().outerHeight(true));
+				adjustContainerHeight($container, $this);
 			});
 		});
+	};
+
+	// Adjust the container height.
+	var adjustContainerHeight = function($container, $that) {
+		$container.css("height", $that.find("." + settings.template.tab.container.classes.join(".")).first().outerHeight(true));
 	};
 
 	// Switch to a tab.
