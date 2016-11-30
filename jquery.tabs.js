@@ -117,9 +117,8 @@ window.tabs = (function($){
 
 			// Wrap all the tabs in a container
 			$this.find("." + settings.template.tab.container.classes.join(".")).wrapAll($("<div class=\"" + settings.template.container.classes.join(" ") + "\"/>")
-								/* .css("overflow", "hidden") */
-								.css("height", $first.outerHeight(true))
-								.css("clear", "both"));
+				.css("height", $first.outerHeight(true))
+				.css("clear", "both"));
 
 			var $container = $this.find("." + settings.template.container.classes.join(".")).first();
 
