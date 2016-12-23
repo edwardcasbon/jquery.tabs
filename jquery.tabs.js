@@ -100,6 +100,10 @@ window.tabs = (function($){
 				randomString = generateRandomString(4),
 				counter = 1;
 
+			var recalculateHeight = function() {
+				$container.css("height", $this.find("." + settings.template.tab.container.classes.join(".")).first().outerHeight(true));
+			};
+
 			// Add empty containers for the ajax'ed tabs, if any.
 			$this.find("nav a").each(function(){
 				var $tabNav = $(this),
@@ -134,7 +138,7 @@ window.tabs = (function($){
 				$this.find("*").css("filter", "inherit");
 			}
 
-			// Add listener.
+			// Add listener for tab anchors
 			$this.find("nav a").on("click", function(e){
 				var $this = $(this);
 
@@ -156,8 +160,14 @@ window.tabs = (function($){
 
 			// Recalculate the height after the window has loaded.
 			$(window).load(function(){
-				$container.css("height", $this.find("." + settings.template.tab.container.classes.join(".")).first().outerHeight(true));
+				recalculateHeight();
 			});
+
+			// Add listener for js-reveal to recalculate height
+			window.addListener($this.find("a.js-reveal-cta"), click, function() {
+				recalculateHeight();
+			});
+
 		});
 	};
 
