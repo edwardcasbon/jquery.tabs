@@ -160,7 +160,7 @@ window.tabs = (function($){
 			});
 
 			// Add listener for js-reveal events to cope with changing tab content height
-			const revealAnchors = $this.find("a.js-reveal-cta");
+			var revealAnchors = $this.find("a.js-reveal-cta");
 			for ( let i = 0; i < revealAnchors.length; i++ ) {
 				revealAnchors[i].addEventListener("js-reveal-animation-start", function(e) {
 					$container.css("height", "auto");
