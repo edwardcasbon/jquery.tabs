@@ -133,7 +133,7 @@ window.tabs = (function($){
 				$this.find("*").css("filter", "inherit");
 			}
 
-			// Add listener.
+			// Add listener for tab anchors
 			$this.find("nav a").on("click", function(e){
 				var $this = $(this);
 
@@ -158,6 +158,17 @@ window.tabs = (function($){
 			$(window).load(function(){
 				adjustContainerHeight($container, $this);
 			});
+
+			// Add listener for js-reveal events to cope with changing tab content height
+			var revealAnchors = $this.find("a.js-reveal-cta");
+			for ( var i = 0; i < revealAnchors.length; i++ ) {
+				revealAnchors[i].addEventListener("js-reveal-animation-start", function(e) {
+					$container.css("height", "auto");
+				});
+				revealAnchors[i].addEventListener("js-reveal-animation-end", function(e) {
+					$container.css("height", $this.find(location.hash).outerHeight(true))
+				});
+			}
 		});
 	};
 
