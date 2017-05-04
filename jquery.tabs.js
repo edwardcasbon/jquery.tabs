@@ -101,7 +101,7 @@ window.tabs = (function($){
 				counter = 1;
 
 			// Add empty containers for the ajax'ed tabs, if any.
-			$this.find("nav a").each(function(){
+			$this.find("nav").first().find("a").each(function(){
 				var $tabNav = $(this),
 					$lastTab = $this.find("." + settings.template.tab.container.classes.join(".")).last();
 
@@ -134,7 +134,7 @@ window.tabs = (function($){
 			}
 
 			// Add listener for tab anchors
-			$this.find("nav a").on("click", function(e){
+			$this.find("nav").first().find("a").on("click", function(e){
 				var $this = $(this);
 
 				if(!$this.parent('li').hasClass(settings.template.nav.links.activeClass)) {
