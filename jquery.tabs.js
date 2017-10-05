@@ -153,7 +153,7 @@ window.tabs = (function($){
 				buildPagination($this);
 			}
 
-            $container.css("height", "auto");
+			$container.css("height", "auto");
 		});
 	};
 
@@ -180,8 +180,8 @@ window.tabs = (function($){
 				$activeTabNav.removeClass(settings.template.nav.links.activeClass);
 				$thisTabNav.parent('li').addClass(settings.template.nav.links.activeClass);
 
-                // set fixed height before animating
-                $activeTab.parent().css("height", $activeTab.outerHeight(true) + "px");
+				// set fixed height before animating
+				$activeTab.parent().css("height", $activeTab.outerHeight(true) + "px");
 
 				// Fade out current article
 				$activeTab.fadeOut(settings.animationSpeed, function(){
@@ -222,8 +222,8 @@ window.tabs = (function($){
 						complete: function(){
 							$thisTab.fadeTo(settings.animationSpeed, 1);
 
-                            // unset fixed height afer animating
-                            $thisTab.parent().css("height", "auto");
+							// unset fixed height afer animating
+							$thisTab.parent().css("height", "auto");
 						},
 						duration: settings.animationSpeed
 					});
