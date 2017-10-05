@@ -153,28 +153,8 @@ window.tabs = (function($){
 				buildPagination($this);
 			}
 
-			// Recalculate the height after the window has loaded.
-			adjustContainerHeight($container, $this);
-			$(window).load(function(){
-				adjustContainerHeight($container, $this);
-			});
-
-			// Add listener for js-reveal events to cope with changing tab content height
-			var revealAnchors = $this.find("a.js-reveal-cta");
-			for ( var i = 0; i < revealAnchors.length; i++ ) {
-				revealAnchors[i].addEventListener("js-reveal-animation-start", function(e) {
-					$container.css("height", "auto");
-				});
-				revealAnchors[i].addEventListener("js-reveal-animation-end", function(e) {
-					$container.css("height", $this.find(location.hash).outerHeight(true))
-				});
-			}
+            $container.css("height", "auto");
 		});
-	};
-
-	// Adjust the container height.
-	var adjustContainerHeight = function($container, $that) {
-		$container.css("height", $that.find("." + settings.template.tab.container.classes.join(".")).first().outerHeight(true));
 	};
 
 	// Switch to a tab.
@@ -199,6 +179,9 @@ window.tabs = (function($){
 				// Reset tabs
 				$activeTabNav.removeClass(settings.template.nav.links.activeClass);
 				$thisTabNav.parent('li').addClass(settings.template.nav.links.activeClass);
+
+                // set fixed height before animating
+                $activeTab.parent().css("height", $activeTab.outerHeight(true) + "px");
 
 				// Fade out current article
 				$activeTab.fadeOut(settings.animationSpeed, function(){
@@ -238,6 +221,9 @@ window.tabs = (function($){
 					}, {
 						complete: function(){
 							$thisTab.fadeTo(settings.animationSpeed, 1);
+
+                            // unset fixed height afer animating
+                            $thisTab.parent().css("height", "auto");
 						},
 						duration: settings.animationSpeed
 					});
